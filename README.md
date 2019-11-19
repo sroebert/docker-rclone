@@ -69,6 +69,8 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **11/19/2019:**
+  * Added arm 32/64 support
 + **11/18/2019:**
   * Add support for UID/GID
 + **11/06/2019:**
