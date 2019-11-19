@@ -1,7 +1,7 @@
 ARG BASE=alpine:latest
 FROM ${BASE}
 
-LABEL maintainer="pfidr"
+LABEL maintainer="sroebert"
 
 ARG RCLONE_VERSION=current
 ARG ARCH=amd64
