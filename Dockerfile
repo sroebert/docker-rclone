@@ -1,4 +1,4 @@
-ARG BASE=alpine:latest
+ARG BASE=amd64/alpine:latest
 FROM ${BASE}
 
 LABEL maintainer="sroebert"
