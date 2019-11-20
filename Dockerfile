@@ -10,6 +10,8 @@ COPY qemu-${ARCH}-static /usr/bin
 
 LABEL maintainer="sroebert"
 
+ARG RCLONE_VERSION=current
+ARG RCLONE_ARCH
 ENV SYNC_SRC=
 ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
@@ -32,11 +34,11 @@ ENV GID=
 
 RUN apk --no-cache add ca-certificates fuse wget dcron tzdata
 
-RUN URL=http://downloads.rclone.org/rclone-current-linux-${RCLONE_ARCH}.zip ; \
+RUN URL=http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${RCLONE_ARCH}.zip ; \
   URL=${URL/\/current/} ; \
   cd /tmp \
   && wget -q $URL \
-  && unzip /tmp/rclone-current-linux-${RCLONE_ARCH}.zip \
+  && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${RCLONE_ARCH}.zip \
   && mv /tmp/rclone-*-linux-${RCLONE_ARCH}/rclone /usr/bin \
   && rm -r /tmp/rclone*
 

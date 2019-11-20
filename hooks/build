@@ -13,6 +13,7 @@ for arch in ${build_architectures[@]}; do
   docker build \
     --build-arg BASE_IMAGE_PREFIX=${BASE_IMAGE_PREFIX} \
     --build-arg ARCH=${arch} \
+    --build-arg RCLONE_ARCH=${RCLONE_ARCH} \
     --file $DOCKERFILE_PATH \
     --tag "${DOCKER_REPO}:${CACHE_TAG}-${arch}"  \
     .
