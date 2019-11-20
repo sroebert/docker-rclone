@@ -4,7 +4,7 @@ FROM ${BASE}
 LABEL maintainer="sroebert"
 
 ARG RCLONE_VERSION=current
-ARG ARCH=arm64v8
+ARG ARCH=arm64
 ENV SYNC_SRC=
 ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
