@@ -1,15 +1,15 @@
 image: sroebert/rclone:latest
 manifests:
-  - image: sroebert/rclone:amd64
+  - image: sroebert/rclone:amd64-latest
     platform:
       architecture: amd64
       os: linux
-  - image: sroebert/rclone:arm32v7
+  - image: sroebert/rclone:arm32v7-latest
     platform:
       architecture: arm
       os: linux
       variant: v7
-  - image: sroebert/rclone:arm64v8
+  - image: sroebert/rclone:arm64v8-latest
     platform:
       architecture: arm64
       os: linux
