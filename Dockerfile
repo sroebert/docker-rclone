@@ -1,10 +1,16 @@
-ARG BASE=amd64/alpine:latest
-FROM ${BASE}
+# see hooks/build and hooks/.config
+ARG BASE_IMAGE_PREFIX
+FROM ${BASE_IMAGE_PREFIX}alpine
+
+# see hooks/post_checkout
+ARG ARCH
+COPY qemu-${ARCH}-static /usr/bin
+
+# Setup
 
 LABEL maintainer="sroebert"
 
 ARG RCLONE_VERSION=current
-ARG ARCH=amd64
 ENV SYNC_SRC=
 ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
@@ -27,12 +33,12 @@ ENV GID=
 
 RUN apk --no-cache add ca-certificates fuse wget dcron tzdata
 
-RUN URL=http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip ; \
+RUN URL=http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${RCLONE_ARCH}.zip ; \
   URL=${URL/\/current/} ; \
   cd /tmp \
   && wget -q $URL \
-  && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
-  && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
+  && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${RCLONE_ARCH}.zip \
+  && mv /tmp/rclone-*-linux-${RCLONE_ARCH}/rclone /usr/bin \
   && rm -r /tmp/rclone*
 
 COPY entrypoint.sh /
