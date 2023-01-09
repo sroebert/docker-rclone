@@ -1,17 +1,9 @@
-# see hooks/build and hooks/.config
-ARG BASE_IMAGE_PREFIX
-FROM ${BASE_IMAGE_PREFIX}alpine
-
-# see hooks/post_checkout
-ARG ARCH
-COPY qemu-${ARCH}-static /usr/bin
+# docker buildx build --platform linux/amd64,linux/arm64,linux/arm --push -t sroebert/rclone:latest .
+FROM rclone/rclone:latest
 
 # Setup
-
 LABEL maintainer="sroebert"
 
-ARG RCLONE_VERSION=current
-ARG RCLONE_ARCH
 ENV SYNC_SRC=
 ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
@@ -31,16 +23,6 @@ ENV FAIL_URL=
 ENV TZ=
 ENV UID=
 ENV GID=
-
-RUN apk --no-cache add ca-certificates fuse wget dcron tzdata
-
-RUN URL=http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${RCLONE_ARCH}.zip ; \
-  URL=${URL/\/current/} ; \
-  cd /tmp \
-  && wget -q $URL \
-  && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${RCLONE_ARCH}.zip \
-  && mv /tmp/rclone-*-linux-${RCLONE_ARCH}/rclone /usr/bin \
-  && rm -r /tmp/rclone*
 
 COPY entrypoint.sh /
 COPY sync.sh /

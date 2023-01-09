@@ -54,7 +54,7 @@ else
       export RETURN_CODE=$?
     fi
   else
-    if test "$(rclone $RCLONE_DIR_CMD $SYNC_SRC $RCLONE_OPTS)"; then
+    if test "$(rclone $RCLONE_DIR_CMD $SYNC_SRC $RCLONE_OPTS --copy-links)"; then
     echo "INFO: Source directory is not empty and can be processed without clear loss of data"
     if [ ! -z "$OUTPUT_LOG" ]
     then
